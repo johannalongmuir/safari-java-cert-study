@@ -1,0 +1,32 @@
+Resources
+---------
+
+Recording
+ - about 24 hours
+ - get an email notifying
+ - follow the same link you came here with
+
+Pre-recorded video (~20 hours)
+ - OCA Java 8 only (so far) but (almost) all relevant for 11!
+ - Slower, more complete
+ - https://learning.oreilly.com/videos/oca-java-se/9780134427201
+ - Other videos:
+ - Functional programming with Java: https://learning.oreilly.com/videos/functional-programming-for/9780134778235
+ - Java Collections: https://learning.oreilly.com/videos/modern-java-collections/9780134663524
+ - And several other live classes
+
+Oracle Java Magazine
+ - https://blogs.oracle.com/javamagazine/issue-archives
+ - Look for the "fix this" column, focused on exam-like questions with discussions of the answers and how to think about the questions
+ 
+Java Ranch / Code Ranch
+ - Forum site that's actually helpful to learners
+ - Created for, and still heavily focused on, certification
+ - Lots of resources, book reviews, sample quizzes (caution!)
+ - JavaRanch.com
+ - Or direct to the Certification FAQ https://coderanch.com/t/659883/Wiki/Ocjp-Faq
+
+Books
+ - Sierra and Bates: https://learning.oreilly.com/library/view/oca-java-se/9781260011388/
+ - Not Java 11 yet (some others are)
+
