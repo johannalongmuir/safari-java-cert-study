@@ -1,6 +1,7 @@
 package datetime;
 
 import java.time.LocalDate;
+import java.time.Month;
 import java.time.Period;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
@@ -28,5 +29,10 @@ public class TryLocalDate {
     C) P3Y6M100D
     D) Throw an exception
      */
+
+    Period sevenDays = Period.ofDays(7);
+    LocalDate feb26 = LocalDate.of(1900, Month.FEBRUARY, 26);
+    LocalDate later = feb26.plus(sevenDays);
+    System.out.println("later is " + later);
   }
 }
