@@ -1,9 +1,19 @@
 package students;
 
+import java.lang.reflect.Method;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-interface StudentCriterion {
+interface Silly1 {
+  boolean test(LocalDate s);
+}
+interface Irrelevant {
+  void doStuff();
+}
+@FunctionalInterface
+interface StudentCriterion /*extends Irrelevant*/ {
+//  void doStuff();
   boolean test(Student s);
 }
 
@@ -23,6 +33,10 @@ class EnthusiasticCriterion implements StudentCriterion {
 }
 
 public class School {
+  public static StudentCriterion getFred() {
+    return s -> s.getName().equals("Fred");
+  }
+
   public static void showStudents(List<Student> ls) {
     for (Student s : ls) {
       System.out.println("> " + s);
@@ -85,9 +99,25 @@ public class School {
     showStudents(getByCriterion(roster, new SmartCriterion()));
     showStudents(getByCriterion(roster, new EnthusiasticCriterion()));
 
-    showStudents(getByCriterion(roster,
-        (Student s) -> {return s.getGpa() < 3.5;}
-        ));
+//    showStudents(getByCriterion(roster, x -> ...));
+
+    Object str = new String("Hello");
+//    Object crit = (StudentCriterion)((Student s) -> {return s.getGpa() < 3.5;})   ;
+//    StudentCriterion crit = (Student s) -> {return s.getGpa() < 3.5;}   ;
+//    StudentCriterion crit = (s) -> {return s.getGpa() < 3.5;}   ;
+//    StudentCriterion crit = s -> {return s.getGpa() < 3.5;}   ;
+//    StudentCriterion crit = (Student s) -> s.getGpa() < 3.5   ;
+    StudentCriterion crit = s -> s.getGpa() < 3.5   ;
+
+    showStudents(getByCriterion(roster, crit));
+
+    Class cl = crit.getClass();
+    System.out.println("Class of my lambda is " + cl.getName());
+    Method[] methods = cl.getMethods();
+    for (Method m : methods) {
+      System.out.println("> " + m);
+    }
+
 
   }
 }
