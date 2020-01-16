@@ -94,12 +94,12 @@ public class School {
         new Student("Sheila", 3.8, "Math", "Physics", "Quantum Mechanics", "Astrophysics")
     );
     showStudents(roster);
-//    showStudents(getSmartStudents(roster, 3.5));
+//    show(getSmartStudents(roster, 3.5));
 
     showStudents(getByCriterion(roster, new SmartCriterion()));
     showStudents(getByCriterion(roster, new EnthusiasticCriterion()));
 
-//    showStudents(getByCriterion(roster, x -> ...));
+//    show(filter(roster, x -> ...));
 
     Object str = new String("Hello");
 //    Object crit = (StudentCriterion)((Student s) -> {return s.getGpa() < 3.5;})   ;
