@@ -215,5 +215,97 @@ C) Put module first on "-d"
 D) module first { provides my.stuff to second; } // provides is "provides ServiceIF with ServiceImpl;"
 * E) module first { exports my.stuff; } // exports a package for use by those modules that "requires ThisModule"
 
+Q15)
+given this (partial) source tree
+myproject/
+  Services/
+    mod1/
+      src/
+        module-info.java: module mod1 { requires mod2; }
+        main/
+         java/
+*           pkg/
+    mod2/
+      src/
+*        module-info.java: module mod1 { exports pkg; }
+        main/
+         java/
+*           pkg/
+
+What command compiles this successfully from the directory myproject?
+A) javac -d out --module-source-path myproject/Services/ -m mod1,mod2
+B) javac -d out --module-source myproject/Services/ -m mod1,mod2
+C) javac -d out --module-source-path 'myproject/Services/*/src/main/java' -m mod1
+D) javac -d out --module-source-path 'myproject/Services/*/src/main/java' -m mod1,mod2
+* E) The example cannot compile
+
+Q16)
+given this (partial) source tree
+myproject/
+  Services/
+    mod1/
+      src/
+        main/
+         java/
+           module-info.java: module mod1 { exports pkg; }
+           pkg/
+    mod2/
+      src/
+        main/
+         java/
+           module-info.java: module mod2 { requires mod1; }
+           otherpkg/
+             Main.java
+What command compiles this successfully from the directory containing myproject?
+A) javac -d out --module-source-path myproject/Services/ -m mod1,mod2
+B) javac -d out --module-source myproject/Services/ -m mod1,mod2
+C) javac -d out --module-source-path 'myproject/Services/*/src/main/java' -m mod1
+D) javac -d out --module-source-path 'myproject/Services/*/src/main/java' -m mod1,mod2
+E) Simon messed up royally! 
+
+Java 8 stuff: javac -d xxx -cp some:class:path $(find . -name \*.java)
+
+Q17)
+given this (partial) source tree
+
+myproject/
+  lib/
+    mod1/
+      module-info.class
+  out/
+    mod2/
+     module-info.class
+       otherpkg/
+         Main.class
+
+What command executes from the directory myproject?
+A) java -d out:lib -m mod2  // -d is for compilation
+B) java -m out:lib mod2/otherpkg/Main // -m is the module to execute, not the module path (-p)
+C) java -module-path 'myproject/*' -m mod1 // module path has two '-', quoted path with asterisk is for --module-source-path in a compilation, -m (module to execute requires mod and class)
+* D) java -p lib:out -m mod2/otherpkg.Main
+E) java --module-path lib:out --module mod2/otherpkg/Main // good except fully qualified class uses dot separator...
+
+Q18)
+  class Base {
+    void doBaseStuff() {
+      System.out.println("doBaseStuff");
+    }
+  }
+
+  class Sub extends Base {
+    void doBaseStuff() {
+      System.out.println("doSubStuff");
+    }
+    void doOtherStuff() {
+      System.out.println("doOtherStuff");
+    }
+  }
+
+In the Base and Sub classes, which are true in isolation?
+    A) doBaseStuff in Base can be marked public without causing errors
+    B) doBaseStuff in Base can be marked private without causing errors
+    C) doBaseStuff in Sub can be marked public without causing errors
+    D) doBaseStuff in Sub can be marked protected without causing errors
+    E) doBaseStuff in Sub can be marked private without causing errors
 
 
