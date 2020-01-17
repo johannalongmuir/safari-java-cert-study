@@ -308,4 +308,30 @@ In the Base and Sub classes, which are true in isolation?
     D) doBaseStuff in Sub can be marked protected without causing errors
     E) doBaseStuff in Sub can be marked private without causing errors
 
+Q19)
+    public int getValue() {return 1;}
+
+which of these methods may individually be added to a subclass of this class?
+
+    A) public int getValue(int x) {return 1;}
+    B) public String getValue() {return "Hello";}
+    C) public String getValue(int x) {return "Hello";}
+
+Q20)
+
+  class Base {
+    void doBaseStuff() { System.out.println("doBaseStuff"); }
+  }
+
+  class Sub extends Base {
+    void doBaseStuff() { System.out.println("doSubStuff"); }
+  }
+
+    A) doBaseStuff in Base can be marked throws Exception without causing errors
+    B) doBaseStuff in Base can be marked throws RuntimeException without causing errors
+    C) doBaseStuff in Sub can be marked throws Exception without causing errors
+    D) doBaseStuff in Sub can be marked throws RuntimeException without causing errors
+    E) if doBaseStuff in Base were marked throws Exception,
+       then doBaseStuff in Sub can be marked throws IOException without causing errors
+
 
