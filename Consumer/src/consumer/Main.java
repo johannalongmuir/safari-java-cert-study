@@ -3,11 +3,13 @@ package consumer;
 import provider.Service;
 
 import java.lang.reflect.Method;
+import java.sql.DriverManager;
 import java.util.ServiceLoader;
 //import provider.impl.ServiceImpl;
 
 public class Main {
   public static void main(String[] args) throws Throwable {
+//    DriverManager.getConnection("BadDB");
 //    Service srv = new ServiceImpl();
 //    Service srv = Service.get();
     ServiceLoader<Service> loader = ServiceLoader.load(Service.class);
