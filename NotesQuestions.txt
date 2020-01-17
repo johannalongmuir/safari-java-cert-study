@@ -1,0 +1,219 @@
+Q1) 
+Given:
+  class X {
+    static int MAX_VAL = 100;
+    int value = 99;
+    public void setVal(int x) {
+      if (x <= MAX_VAL) value = x;
+    }
+  }
+
+And:
+    X a = new X();
+    X b = new X();
+    a.setVal(120);
+    System.out.print(a.value + ", ");
+    b.MAX_VAL = 150;
+    a.setVal(140);
+    System.out.println(a.value);
+What is the result?
+    A) 99, 99
+    B) 120, 140
+    C) 99, 140
+    D) Compilation failure
+    E) Exception at runtime
+
+Q2) 
+Given:
+  class Y {
+    static String sayHi() { return "Y-Hello"; }
+    String sayHi2() { return "Y-Hello2"; }
+  }
+and:
+  class Z extends Y {
+    static String sayHi() { return "Z-Hello"; }
+    String sayHi2() { return "Z-Hello2"; }
+  }
+and:
+    Y y = new Z();
+    System.out.println(y.sayHi() + ", " +y.sayHi2());
+
+    What is the result?
+    A) Y-Hello, Y-Hello2
+    B) Y-Hello, Z-Hello2
+    C) Z-Hello, Z-Hello2
+    D) Z-Hello, Y-Hello2
+    E) Compilation fails
+
+Q3)
+given:
+  public void q11A(int x) {
+    x = x + 1;
+  }
+and:
+    int x = 99;
+    q11A(x);
+    System.out.println(x);
+
+What is the result?
+    A) 99
+    B) 100
+    C) An error
+
+Q4)
+Given:
+  public void q12A(StringBuilder x) {
+    x.append(" world");
+  }
+
+and:
+    StringBuilder x = new StringBuilder("Hello");
+    q12A(x);
+    System.out.println(x);
+
+What is the result?
+    A) Hello
+    B) Hello world
+    C)  world
+    D) An error
+
+Q5)
+  public void q14A(Integer x) {
+    x = x + 1;
+  }
+
+    Integer x = 99;
+    q14A(x);
+    System.out.println(x);
+
+What is the result?
+    A) 99
+    B) 100
+    C) An error
+
+Q6)
+  public void q13A(int[] x) {
+    x[0] = x[0] + 1;
+  }
+
+    int x[] = {99};
+    q13A(x);
+    System.out.println(x[0]);
+
+What is the result?
+    A) 99
+    B) 100
+    C) An error
+
+Q7)
+   StringBuilder sb1 = new StringBuilder("Hello");
+    StringBuilder sb2 = sb1;
+    sb1 = null;
+
+    Which is true?
+    A) sb1 is unreferenced and eligible for GC
+    B) sb1 and sb2 are unreferenced and eligible for GC
+    C) No objects are eligible for GC
+
+Q8)
+    StringBuilder sb1 = new StringBuilder("Hello");
+    StringBuilder sb2 = new StringBuilder("World");
+    sb1 = null;
+    sb2 = sb1;
+
+    Which is true?
+    A) Object containing "Hello" is unreferenced and eligible for GC
+    B) Object containing "World" is unreferenced and eligible for GC
+    C) Object containing "Hello", and "World" are both unreferenced and eligible for GC
+    D) No objects are eligible for GC
+
+
+Q9)
+Which are legal (individually):
+NO A) StudentCriterion sc = Student s -> { return s.getGpa() > 3;};
+NO B) StudentCriterion sc = s -> { s.getGpa() > 3 };
+NO C) Object sc = s -> {return s.getGpa() > 3;};
+D) StudentCriterion sc = (s) -> s.getGpa() > 3;
+NO E) StudentCriterion sc = s -> s.getCourses().size();
+
+Q10)
+Which are legal individually:
+NO  A) Function<String, String> fss = s -> { System.out.println(s); };
+YES B) Consumer<String> cs = s -> { System.out.println(s); };
+NO  C) Supplier<String> ss = (s1, s2) -> s1 + s2;
+NO  D) BiPredicate<String> bps = (String s) -> { return s.length() > 0; };
+YES E) ToIntFunction<String> tofs = s -> s.length();
+
+Q11)
+  class Base {
+    void doBaseStuff() { System.out.println("doBaseStuff"); }
+  }
+
+  class Sub extends Base {
+    void doBaseStuff() { System.out.println("doSubStuff"); }
+    void doOtherStuff() { System.out.println("doOtherStuff"); }
+  }
+
+    Base b = new Sub();
+    b.doOtherStuff();
+
+What is the result?
+    A) doSubStuff
+    B) doOtherStuff
+    C) doBaseStuff
+    D) Exception at runtime
+    E) Compilation failure
+
+Q12)
+  class Base {
+    void doBaseStuff() { System.out.println("doBaseStuff"); }
+  }
+
+  class Sub extends Base {
+    void doBaseStuff() { System.out.println("doSubStuff"); }
+    void doOtherStuff() { System.out.println("doOtherStuff"); }
+  }
+
+    Base b = new Base();
+    Sub s = (Sub)b;
+    s.doOtherStuff();
+
+What is the result?
+    A) doSubStuff
+    B) doOtherStuff
+    C) doBaseStuff
+    D) Exception at runtime
+    E) Compilation failure
+
+IF:
+    Base b = new Base();
+    if (b instanceof Sub) {
+      Sub s = (Sub)b;
+      s.doOtherStuff();
+    }
+NO OUTPUT (and no errors)
+
+Q13)
+Given:
+module first {
+  exports my.stuff;
+}
+Which would allow module second to use class my.stuff.Banana
+
+A) module second { requires my.stuff; }
+B) module second { requires Banana; }
+C) module second { uses my.stuff.Banana; } // uses is specifically for reflection (and takes package)
+D) module second { requires first; } // requires mentions a MODULE
+E) module second { opens first; }
+
+Q14)
+What must exist for Q13 to work!?
+
+A) Put code for my.stuff and contents on "classpath"
+* B) Put module first on "--module-path"
+C) Put module first on "-d"
+D) module first { provides my.stuff to second; } // provides is "provides ServiceIF with ServiceImpl;"
+* E) module first { exports my.stuff; } // exports a package for use by those modules that "requires ThisModule"
+
+
+
